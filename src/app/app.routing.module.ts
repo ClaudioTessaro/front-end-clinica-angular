@@ -5,8 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
+  { path: '', loadChildren: ()=> import('./private/private.module').then(m => m.PrivateModule), canActivate:[AuthGuard]},
   { path: 'login', component: LoginComponent},
-  { path: '', component: HomeComponent, canActivate:[AuthGuard]}
+  {
+    path: '**',
+    redirectTo: ''
+  }
 
 
 ];

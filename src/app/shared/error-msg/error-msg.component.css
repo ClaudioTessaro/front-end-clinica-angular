@@ -1,0 +1,9 @@
+.errorDiv {
+  margin-bottom: 0px;
+}
+
+.error {
+  color: red;
+  font-size: 11px;
+  margin-left: 3px;
+}

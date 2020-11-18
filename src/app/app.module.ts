@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './private/components/components.module';
 
 import { SharedModule } from './shared/shared.module';
@@ -13,23 +14,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from './public/service/auth.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { HomeComponent } from './private/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-
-
-
-
   ],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
