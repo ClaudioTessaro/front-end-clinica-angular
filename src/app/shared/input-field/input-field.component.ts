@@ -16,9 +16,10 @@ const INPUT_FIELD_VALUE_ACCESSOR: any = {
 export class InputFieldComponent implements ControlValueAccessor {
 
   @Input() classeCss;
-  @Input() placeholder;
+  @Input() placeholder = "";
   @Input() id: string;
   @Input() label: string;
+  @Input() mask:string = "";
   @Input() type = 'text';
   @Input() control;
   @Input() isReadOnly = false;

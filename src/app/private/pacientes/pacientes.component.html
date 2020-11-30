@@ -1,13 +1,10 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
-
-</div>
 <div class="container-fluid mt--7 header pb-8 pt-lg-2 d-flex align-items-center">
     <div class="col-xl-12 order-xl-1">
       <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
             <div class="col-8">
-              <h3 class="mb-0">Paciente</h3>
+              <h3 class="mb-0">Cadastrar Paciente</h3>
             </div>
           </div>
         </div>
@@ -18,14 +15,18 @@
               <div class="row">
                 <app-input-field class="col-lg-6" formControlName="nome" [classeCss]="aplicaCssErro('nome')"
                 id="nome" label="Nome" [control]="formulario.get('nome')" type="text" placeholder="Digite um nome"></app-input-field>
-                <app-input-field class="col-lg-6" formControlName="email" [classeCss]="aplicaCssErro('email')"
-                id="email" label="Email" [control]="formulario.get('email')" type="text" placeholder="email@email.com"></app-input-field>
+                <app-input-field class="col-lg-2" formControlName="cpf" [classeCss]="aplicaCssErro('cpf')"
+                id="cpf" label="CPF" [control]="formulario.get('cpf')" type="text" mask = "000.000.000-00" placeholder="000.000.000-00"></app-input-field>
+                <div class="form-group col-lg-2">
+                  <label for="exampleFormControlSelect1" class="form-control-label">Sexo</label>
+                  <select class="form-control form-control-alternative" formControlName="sexo" id="exampleFormControlSelect1" >
+                    <option *ngFor="let sex of sexo" [value]="sex.nome">{{ sex.nome }}</option>
+                  </select>
+                </div>
               </div>
               <div class="row">
-                <app-input-field class="col-lg-6" formControlName="email" [classeCss]="aplicaCssErro('email')"
-                id="email" label="Email" [control]="formulario.get('email')" type="text" placeholder="email@email.com"></app-input-field>
-                <app-input-field class="col-lg-6" formControlName="email" [classeCss]="aplicaCssErro('email')"
-                id="email" label="Email" [control]="formulario.get('email')" type="text" placeholder="email@email.com"></app-input-field>
+                <app-input-field class="col-lg-2" formControlName="dataNascimento" [classeCss]="aplicaCssErro('dataNascimento')"
+                id="dataNascimento" label="Data de Nascimento" [control]="formulario.get('dataNascimento')" type="date"></app-input-field>
               </div>
             </div>
             <hr class="my-4" />
@@ -33,38 +34,42 @@
             <div class="pl-lg-4">
               <div class="row">
                 <app-input-field class="col-lg-6" formControlName="email" [classeCss]="aplicaCssErro('email')"
-                id="email" label="Email" [control]="formulario.get('email')" type="text" placeholder="email@email.com"></app-input-field>
+                id="email" label="E-mail" [control]="formulario.get('email')" type="text" placeholder="email@email.com"></app-input-field>
+                <app-input-field class="col-lg-4" formControlName="telefone" [classeCss]="aplicaCssErro('telefone')"
+                id="email" label="Celular" [control]="formulario.get('telefone')" type="text" mask = "(00) 0 0000-0000"  placeholder="(00) 0 0000-0000"></app-input-field>
               </div>
-              <div class="row">
-                <app-input-field class="col-lg-6" formControlName="email" [classeCss]="aplicaCssErro('email')"
-                id="email" label="Email" [control]="formulario.get('email')" type="text" placeholder="email@email.com"></app-input-field>
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Country</label>
-                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-                  </div>
+            </div>
+            <hr class="my-4" />
+            <h6 class="heading-small text-muted mb-4">Endereço</h6>
+            <div formGroupName="endereco">
+              <div class="pl-lg-4">
+                <div class="row">
+                  <app-input-field class="col-lg-4" formControlName="rua" [classeCss]="aplicaCssErro('endereco.rua')"
+                  id="rua" label="Rua" [control]="formulario.get('endereco.rua')" type="text" placeholder="Nome da Rua"></app-input-field>
+                  <app-input-field class="col-lg-3" formControlName="numero" [classeCss]="aplicaCssErro('endereco.numero')"
+                  id="numero" label="Numero" [control]="formulario.get('endereco.numero')" type="text" placeholder="Numero"></app-input-field>
+                  <app-input-field class="col-lg-3" formControlName="bairro" [classeCss]="aplicaCssErro('endereco.bairro')"
+                  id="bairro" label="Bairro" [control]="formulario.get('endereco.bairro')" type="text" placeholder="Bairro"></app-input-field>
                 </div>
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Postal code</label>
-                    <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
+                <div class="row">
+                  <app-input-field class="col-lg-4" formControlName="cidade" [classeCss]="aplicaCssErro('endereco.cidade')"
+                  id="cidade" label="Cidade" [control]="formulario.get('endereco.rua')" type="text" placeholder="Nome da Cidade"></app-input-field>
+                  <div class="form-group col-lg-2">
+                    <label for="exampleFormControlSelect1" class="form-control-label">Pais</label>
+                    <select class="form-control form-control-alternative" formControlName="pais" id="exampleFormControlSelect1" >
+                      <option *ngFor="let pais of paises" [value]="pais">{{ pais }}</option>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
             <hr class="my-4" />
-            <!-- Description -->
-            <h6 class="heading-small text-muted mb-4">About me</h6>
-            <div class="pl-lg-4">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-              </div>
+            <div class="d-flex">
+              <button type="button" class="btn btn-secondary ">Voltar</button>
+              <button type="submit" class="btn btn-primary ml-auto p-2" >Cadastrar</button>
             </div>
-            <button type="submit" >Cadastrar</button>
           </form>
         </div>
       </div>
     </div>
-
 </div>

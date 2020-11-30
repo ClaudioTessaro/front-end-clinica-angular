@@ -1,7 +1,7 @@
 <div class="form-group" >
   <label [attr.for]="id" class="form-control-label">{{ label }}</label>
-  <input [type]="type" class="form-control form-control-alternative" [ngClass]="classeCss"
-    [id]="id" [readonly]="!!isReadOnly"
+  <input mask="{{ mask }}" [type]="type" class="form-control form-control-alternative" [ngClass]="classeCss"
+    [id]="id" [readonly]="!!isReadOnly" [mask] = "mask"
     [(ngModel)]="value" [placeholder]="placeholder">
   <app-error-msg [control]="control" [label]="label"></app-error-msg>
 </div>

@@ -1,3 +1,4 @@
+
 import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { PrivateRoutingModule } from './private.routing.module';
@@ -11,7 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [PacientesComponent, HomeComponent],
+  declarations: [
+    PacientesComponent,
+    HomeComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -20,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+
 
   ]
 })

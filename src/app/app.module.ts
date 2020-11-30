@@ -1,3 +1,4 @@
+import { HttpRequestInterceptor } from './shared/interceptor/http.interceptor';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './private/components/components.module';
 
@@ -10,7 +11,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './public/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthService } from './public/service/auth.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -34,7 +35,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ComponentsModule
 
   ],
-  providers: [AuthService],
+  providers: [AuthService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRequestInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   exports: []
 })
