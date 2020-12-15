@@ -34,7 +34,7 @@ export class AlertModalService {
     this.showAlert(message, AlertTypes.SUCCESS, 3000);
   }
 
-  showConfirm(title: string, msg: string, okTxt?: string, cancelTxt?: string) {
+  showConfirm(title: string, msg: string, okTxt?: string, cancelTxt?: string, classBotaoConfirm?:string) {
     const bsModalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
     bsModalRef.content.title = title;
     bsModalRef.content.msg = msg;
@@ -42,11 +42,12 @@ export class AlertModalService {
     if (okTxt) {
       bsModalRef.content.okTxt = okTxt;
     }
-
+    if(classBotaoConfirm){
+      bsModalRef.content.type = classBotaoConfirm;
+    }
     if (cancelTxt) {
       bsModalRef.content.cancelTxt = cancelTxt;
     }
-
-    return (<ConfirmModalComponent>bsModalRef.content).confirmResult;
+     return (<ConfirmModalComponent>bsModalRef.content).confirmResult;
   }
 }

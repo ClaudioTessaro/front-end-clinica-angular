@@ -1,5 +1,4 @@
 import { NgxMaskModule } from 'ngx-mask';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';

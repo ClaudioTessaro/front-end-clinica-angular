@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthService } from './public/service/auth.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PrivateModule } from './private/private.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HttpClientModule,
     SharedModule,
     ModalModule.forRoot(),
-    ComponentsModule
+    ComponentsModule,
+    PrivateModule
 
   ],
   providers: [AuthService,{

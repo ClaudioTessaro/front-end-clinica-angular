@@ -13,6 +13,7 @@ export class ConfirmModalComponent implements OnInit {
   @Input() msg: string;
   @Input() cancelTxt = 'Cancelar';
   @Input() okTxt = 'Sim';
+  @Input() type = 'danger';
 
   confirmResult: Subject<boolean>;
 
