@@ -1,3 +1,4 @@
+import { BootstrapModule } from './bootstrap.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +18,7 @@ import { DescriptionModalComponent } from './description-modal/description-modal
     ConfirmModalComponent,
     InputFieldComponent,
     ErrorMsgComponent,
-    DescriptionModalComponent
+    DescriptionModalComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +26,7 @@ import { DescriptionModalComponent } from './description-modal/description-modal
     FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    BootstrapModule
   ],
   exports:[
     InputFieldComponent,

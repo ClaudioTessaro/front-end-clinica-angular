@@ -1,3 +1,4 @@
+import { DescriptionModalService } from './../../../shared/description-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
@@ -11,7 +12,10 @@ import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-moda
 })
 export class VisualizarPacienteComponent implements OnInit {
 
-  constructor(private confirmModal: AlertModalService, private router:Router) { }
+  constructor(
+    private confirmModal: AlertModalService,
+    private router:Router,
+    private descriptionModal: DescriptionModalService) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +29,7 @@ export class VisualizarPacienteComponent implements OnInit {
   }
 
   openDetalhar(){
-    this.confirmModal.showDetails();
+    this.descriptionModal.showDescription();
   }
 
 }
