@@ -24,4 +24,8 @@ export class VisualizarPacienteComponent implements OnInit {
     this.router.navigate(['/pacientes'])
   }
 
+  openDetalhar(){
+    this.confirmModal.showDetails();
+  }
+
 }

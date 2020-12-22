@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { DescriptionModalComponent } from './description-modal/description-modal.component';
 
 
 
@@ -15,7 +16,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     AlertModalComponent,
     ConfirmModalComponent,
     InputFieldComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    DescriptionModalComponent
   ],
   imports: [
     CommonModule,

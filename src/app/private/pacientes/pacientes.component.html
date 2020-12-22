@@ -15,9 +15,9 @@
               <div class="row">
                 <app-input-field class="col-lg-6" formControlName="nome" [classeCss]="aplicaCssErro('nome')"
                 id="nome" label="Nome" [control]="formulario.get('nome')" type="text" placeholder="Digite um nome"></app-input-field>
-                <app-input-field class="col-lg-2" formControlName="cpf" [classeCss]="aplicaCssErro('cpf')"
+                <app-input-field class="col-lg-3" formControlName="cpf" [classeCss]="aplicaCssErro('cpf')"
                 id="cpf" label="CPF" [control]="formulario.get('cpf')" type="text" mask = "000.000.000-00" placeholder="000.000.000-00"></app-input-field>
-                <div class="form-group col-lg-2">
+                <div class="form-group col-lg-3">
                   <label for="exampleFormControlSelect1" class="form-control-label">Sexo</label>
                   <select class="form-control form-control-alternative" formControlName="sexo" id="exampleFormControlSelect1" >
                     <option *ngFor="let sex of sexo" [value]="sex.nome">{{ sex.nome }}</option>
@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="row">
-                <app-input-field class="col-lg-2" formControlName="dataNascimento" [classeCss]="aplicaCssErro('dataNascimento')"
+                <app-input-field class="col-lg-3" formControlName="dataNascimento" [classeCss]="aplicaCssErro('dataNascimento')"
                 id="dataNascimento" label="Data de Nascimento" [control]="formulario.get('dataNascimento')" type="date"></app-input-field>
               </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="row">
                   <app-input-field class="col-lg-4" formControlName="cidade" [classeCss]="aplicaCssErro('endereco.cidade')"
                   id="cidade" label="Cidade" [control]="formulario.get('endereco.rua')" type="text" placeholder="Nome da Cidade"></app-input-field>
-                  <div class="form-group col-lg-2">
+                  <div class="form-group col-lg-3">
                     <label for="exampleFormControlSelect1" class="form-control-label">Pais</label>
                     <select class="form-control form-control-alternative" formControlName="pais" id="exampleFormControlSelect1" >
                       <option *ngFor="let pais of paises" [value]="pais">{{ pais }}</option>
@@ -65,7 +65,8 @@
             </div>
             <hr class="my-4" />
             <div class="d-flex">
-              <button type="button" class="btn btn-secondary ">Voltar</button>
+              <button type="button" class="btn btn-secondary" (click)="voltar()">Voltar</button>
+              <button type="reset" class="btn btn-secondary ml-auto" >Limpar</button>
               <button type="submit" class="btn btn-primary ml-auto p-2" >Cadastrar</button>
             </div>
           </form>

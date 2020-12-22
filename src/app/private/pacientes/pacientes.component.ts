@@ -5,6 +5,7 @@ import { PaisService } from './../../shared/pais.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
+import { Location } from '@angular/common';
 
 
 
@@ -34,6 +35,7 @@ export class PacientesComponent extends BaseFormComponent implements OnInit {
     private paisesService: PaisService,
     private pacienteService: PacienteService,
     private modal: AlertModalService,
+    private _location: Location
     ) {
       super();
       this.getPaises();
@@ -84,6 +86,10 @@ export class PacientesComponent extends BaseFormComponent implements OnInit {
         }
 
     } );
+  }
+
+  voltar(){
+    this._location.back();
   }
 
 
