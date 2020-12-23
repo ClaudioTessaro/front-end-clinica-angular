@@ -17,8 +17,33 @@ export class VisualizarPacienteComponent implements OnInit {
     private router:Router,
     private descriptionModal: DescriptionModalService) { }
 
+
+
   ngOnInit(): void {
+
   }
+
+  dadosMockado: Array<Object> = [{
+    campo:'Nome',
+    descricao:"Claudio Tessao"
+  },{
+    campo:"CPF",
+    descricao:"79160301287"
+
+  },{
+    campo:"Sexo",
+    descricao:"Masculino"
+  },{
+   campo:'Nome',
+   descricao:"Claudio Tessao"
+ },{
+   campo:"CPF",
+   descricao:"79160301287"
+
+ },{
+   campo:"Sexo",
+   descricao:"Masculino"
+ }]
 
   openModal(){
     this.confirmModal.showConfirm('Excluir','Deseja realmente excluir o paciente ?','Excluir');
