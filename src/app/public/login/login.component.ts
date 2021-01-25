@@ -47,7 +47,10 @@ export class LoginComponent implements OnInit {
         response => {
           this.route.navigate([""])
         },
-        (error:any) => this.modal.showAlertDanger(error.error.msg)
+        (error:any) => {
+          const errorMsg = error.error.msg || 'Servidor Indisponivel, por favor, contacte o administrador.'; 
+          this.modal.showAlertDanger(errorMsg)
+        }
         );
   }
 

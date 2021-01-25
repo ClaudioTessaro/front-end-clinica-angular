@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VisualizarPacienteComponent } from './pacientes/visualizar/visualizar-paciente.component';
+
 
 
 
@@ -15,7 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     PacientesComponent,
-    HomeComponent],
+    HomeComponent,
+    VisualizarPacienteComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -24,8 +28,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-  
-
 
   ]
 })

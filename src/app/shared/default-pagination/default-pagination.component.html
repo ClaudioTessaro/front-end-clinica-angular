@@ -1,0 +1,28 @@
+<!-- Pagination -->
+<div class="d-flex justify-content-between align-items-center p-4 default-pagination">
+
+  <div class="d-block">
+    <p data-teste="total-elementos" id="total-elementos" class="m-0 small">{{paginacao.totalDeElementos }} registros
+      encontrados</p>
+  </div>
+
+  <div class="d-block small">
+    <span>Exibir</span>
+    <select data-teste="select-page-size" id="page-select" class="custom-select text-nowrap w-auto mx-2"
+      (change)="pageSizeChange($event.target.value)">
+      <option data-teste="options-size" [value]="pgSize" *ngFor="let pgSize of pageSizes" id="option-page-{{pgSize}}"
+        [selected]="pgSize === paginacao?.tamanho">{{pgSize}}
+      </option>
+    </select>
+    <span>registros por página</span>
+  </div>
+
+  <div class="card-footer py-4">
+    <ngb-pagination [(collectionSize)]="paginacao.totalDeElementos"
+      [(page)]="paginacao.numero" [maxSize]="maxButtons" [(pageSize)]="paginacao.tamanho" [rotate]="true"
+      [boundaryLinks]="true" (pageChange)="pageChange($event)">
+    </ngb-pagination>
+  </div>
+ 
+
+</div>

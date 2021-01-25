@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { DescriptionModalComponent } from './description-modal/description-modal.component';
+import { TableComponent } from './table/table.component';
+import { DefaultPaginationComponent } from './default-pagination/default-pagination.component';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,6 +22,8 @@ import { DescriptionModalComponent } from './description-modal/description-modal
     InputFieldComponent,
     ErrorMsgComponent,
     DescriptionModalComponent,
+    TableComponent,
+    DefaultPaginationComponent
   ],
   imports: [
     CommonModule,
@@ -26,11 +31,15 @@ import { DescriptionModalComponent } from './description-modal/description-modal
     FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
-    BootstrapModule
+    BootstrapModule,
+    NgbModule,
+    NgbPaginationModule
   ],
   exports:[
     InputFieldComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    TableComponent,
+    DefaultPaginationComponent
   ]
 })
 export class SharedModule { }

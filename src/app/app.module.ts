@@ -34,7 +34,8 @@ import { PrivateModule } from './private/private.module';
     SharedModule,
     ModalModule.forRoot(),
     ComponentsModule,
-    PrivateModule
+    PrivateModule,
+    
 
   ],
   providers: [AuthService,{
