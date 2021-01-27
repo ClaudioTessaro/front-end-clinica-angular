@@ -28,13 +28,13 @@
         </form>
         <div class="table-responsive">
           <app-table [headerArray]="['Nome','Telefone','Email','Sexo']"
-           [propertyArray]="['nome', 'telefone', 'email','sexo']"  [contentArray]="dadosMockado"
+           [propertyArray]="['nome', 'telefone', 'email','sexo']"  [contentArray]="listaPacientes"
            (show)="edit($event)" (emitEditButtonEvent)="edit($event)" (emitDetailButtonEvent)="detail($event)" (emitDeleteButtonEvent)="delete($event)"
            [showEdit]="loggedUserCanEdit()" [showDetail]="loggedUserCanDetail()" [showDelete]="loggedUserCanDelete()">           
           </app-table>
         </div>
         <app-default-pagination *ngIf="pagination" (pageSizeChanged)="pageSizeChange($event)"
-          (paginationChanged)="pageChange($event)" [pageSizes]="[5, 10, 15, 20]" [maxButtons]="3"
+          (paginationChanged)="pageChange($event)" [pageSizes]="[5, 10, 15]" [maxButtons]="3"
           [paginacao]="pagination"></app-default-pagination>
       </div>
     </div>

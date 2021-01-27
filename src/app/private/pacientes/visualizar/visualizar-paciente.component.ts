@@ -6,6 +6,8 @@ import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.comp
 import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-modal.component';
 import { Paciente } from '../../model/paciente';
 import { Pagination } from 'src/app/shared/default-pagination/pagination.interface';
+import { PacienteService } from '../paciente.service';
+import { PacientesPaginado } from '../../model/PacientesPaginado';
 
 @Component({
   selector: 'app-visualizar-paciente',
@@ -14,58 +16,32 @@ import { Pagination } from 'src/app/shared/default-pagination/pagination.interfa
 })
 export class VisualizarPacienteComponent implements OnInit {
   pagination: Pagination = Object();
-  dadosMockado: Paciente[] = [{
-    nome:'Claudio Tessaro',
-    telefone:'(083) 9 96531831',
-    email: 'claudio0190@hotmail.com',
-    sexo: 'Masculino'
-  },{
-    nome:'Claudio Tessaro',
-    telefone:'(083) 9 96531831',
-    email: 'claudio0190@hotmail.com',
-    sexo: 'Masculino'
-  },{
-    nome:'Claudio Tessaro',
-    telefone:'(083) 9 96531831',
-    email: 'claudio0190@hotmail.com',
-    sexo: 'Masculino'
-  },{
-    nome:'Claudio Tessaro',
-    telefone:'(083) 9 96531831',
-    email: 'claudio0190@hotmail.com',
-    sexo: 'Masculino'
- },{
-  nome:'Claudio Tessaro',
-  telefone:'(083) 9 96531831',
-  email: 'claudio0190@hotmail.com',
-  sexo: 'Masculino'
- },{
-  nome:'Claudio Tessaro',
-  telefone:'(083) 9 96531831',
-  email: 'claudio0190@hotmail.com',
-  sexo: 'Masculino'
- }]
-
   loading: boolean = false
+  listaPacientes: PacientesPaginado[] = [];
 
   constructor(
     private confirmModal: AlertModalService,
     private router:Router,
-    private descriptionModal: DescriptionModalService) { }
+    private descriptionModal: DescriptionModalService,
+    private pacienteService: PacienteService) { }
 
 
 
   ngOnInit() {
       this.pagination.tamanho = 10;
       this.pagination.numero = 0;
-      this.pagination.totalDeElementos = 100;
       this.getRequisition();
     }
 
-  getRequisition(): void {
+    getRequisition(): void {
       this.loading = true;
-      this.pagination.tamanho = 10;
-      this.loading = false;
+      --this.pagination.numero
+      this.pacienteService.buscarPacientes(this.pagination).subscribe(resp => {
+        this.listaPacientes = resp.itens;
+        this.pagination = resp.paginacao;
+        this.pagination.numero = ++resp.paginacao.numero;
+        this.loading = false;
+      });
     }
 
     pageChange(requestedPage: number): void {
