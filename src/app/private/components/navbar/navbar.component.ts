@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ROUTES } from '../sidebar/sidebar.component';
+import { AuthService } from '../authService/auth.service';
+
+
+
 
 
 @Component({
@@ -13,7 +17,11 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location) {
+
+  constructor(
+    location: Location,
+    private auth: AuthService
+    ) {
     this.location = location;
   }
 
@@ -21,6 +29,7 @@ export class NavbarComponent implements OnInit {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
   }
   getTitle(){
+    
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if(titlee.charAt(0) === '#'){
         titlee = titlee.slice( 1 );
@@ -32,6 +41,10 @@ export class NavbarComponent implements OnInit {
         }
     }
     return 'Dashboard';
+  }
+
+  deslogar(){
+    this.auth.deslogar();
   }
 
 }
