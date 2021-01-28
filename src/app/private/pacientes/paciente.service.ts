@@ -7,6 +7,7 @@ import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { PacientesPaginado } from '../model/PacientesPaginado';
 import { Pagination } from 'src/app/shared/default-pagination/pagination.interface';
+import { ResponseGeral } from 'src/app/shared/interface/responsegeral';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,17 @@ export class PacienteService {
     return this.http.get<PacientesPaginado>(`${this.API}paciente?size=${pagination.tamanho}&page=${pagination.numero}`);
   }
 
+  
+  buscarPacientesPorNome(nome?: any):Observable<PacientesPaginado>{
+    return this.http.get<PacientesPaginado>(`${this.API}paciente?size=15&nome=${nome.nome}`);
+  }
+
+  remove(id: number){
+    return this.http.delete<ResponseGeral>(`${this.API}paciente/${id}`);
+  }
+
+  buscarPacientePorId(id: number){
+    return this.http.get<CadastrarPaciente>(`${this.API}paciente/${id}`);
+  }
 
 }

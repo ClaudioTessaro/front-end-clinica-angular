@@ -2,12 +2,12 @@ import { DescriptionModalService } from './../../../shared/description-modal.ser
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
-import { ConfirmModalComponent } from 'src/app/shared/confirm-modal/confirm-modal.component';
-import { Paciente } from '../../model/paciente';
 import { Pagination } from 'src/app/shared/default-pagination/pagination.interface';
 import { PacienteService } from '../paciente.service';
 import { PacientesPaginado } from '../../model/PacientesPaginado';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { switchMap, take } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-visualizar-paciente',
@@ -18,19 +18,42 @@ export class VisualizarPacienteComponent implements OnInit {
   pagination: Pagination = Object();
   loading: boolean = false
   listaPacientes: PacientesPaginado[] = [];
+  formulario: FormGroup;
 
   constructor(
     private confirmModal: AlertModalService,
+    private alertModal: AlertModalService,
     private router:Router,
     private descriptionModal: DescriptionModalService,
-    private pacienteService: PacienteService) { }
+    private pacienteService: PacienteService,
+    private formBuilder: FormBuilder
+    ) { }
 
 
 
   ngOnInit() {
+      this.formulario = this.formBuilder.group({
+        nome: [null],
+      });
       this.pagination.tamanho = 10;
       this.pagination.numero = 0;
       this.getRequisition();
+    }
+
+    onSubmit(){
+      this.pacienteService.buscarPacientesPorNome(this.mapperCadastro(this.formulario)).subscribe(resp => {
+      this.loading = true;
+      this.listaPacientes = resp.itens;
+      this.loading = false;
+    })
+     
+    }
+
+    mapperCadastro(formulario): any{      
+      const data = {
+        nome: formulario.get('nome').value
+      }
+      return data;
     }
 
     getRequisition(): void {
@@ -62,8 +85,20 @@ export class VisualizarPacienteComponent implements OnInit {
     }
   
 
-  openModal() {
-    this.confirmModal.showConfirm('Excluir','Deseja realmente excluir o paciente ?','Excluir');
+  openModal(id) {
+    const result$ = this.confirmModal.showConfirm('Excluir','Deseja realmente excluir o paciente ?','Excluir');
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap(result => result ? this.pacienteService.remove(id) : EMPTY)
+      ).subscribe(
+        sucess =>{
+          this.getRequisition();
+          this.alertModal.showAlertSuccess(sucess.message);
+        },error => {
+          this.alertModal.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.');
+        }
+      )
   }
 
   direcionar(){
@@ -75,7 +110,7 @@ export class VisualizarPacienteComponent implements OnInit {
   }
 
   edit({ id }): void {
-    this.router.navigate(['configuracoes/editar-perfil/', id]);
+    this.router.navigate(['paciente/', id]);
   }
 
   detail({id}): void {
@@ -83,7 +118,7 @@ export class VisualizarPacienteComponent implements OnInit {
   }
 
   delete({id}):void {
-    this.openModal();
+    this.openModal(id);
   }
 
   loggedUserCanEdit(){

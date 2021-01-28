@@ -1,11 +1,13 @@
-import { AlertModalService } from './../../shared/alert-modal.service';
+import { AlertModalService } from '../../shared/alert-modal.service';
 import { PacienteService } from './paciente.service';
 import { CadastrarPaciente } from '../model/cadastrarPaciente';
-import { PaisService } from './../../shared/pais.service';
+import { PaisService } from '../../shared/pais.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 
@@ -14,9 +16,13 @@ import { Location } from '@angular/common';
   templateUrl: './pacientes.component.html',
   styleUrls: ['./pacientes.component.css']
 })
-export class PacientesComponent extends BaseFormComponent implements OnInit {
+export class PacientesEditComponent extends BaseFormComponent implements OnInit {
 
-  label: string = "Cadastrar Paciente";
+  label: string = "Editar Paciente";
+
+  idPaciente: number;
+
+  private routeSub: Subscription;
 
    sexo = [
     {
@@ -37,7 +43,8 @@ export class PacientesComponent extends BaseFormComponent implements OnInit {
     private paisesService: PaisService,
     private pacienteService: PacienteService,
     private modal: AlertModalService,
-    private _location: Location
+    private _location: Location,
+    private route: ActivatedRoute
     ) {
       super();
       this.getPaises();
@@ -45,22 +52,35 @@ export class PacientesComponent extends BaseFormComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.routeSub = this.route.params.subscribe(async params => {
+      this.idPaciente = params['id'];
+   
+
+    const paciente: CadastrarPaciente = await this.pacienteService.buscarPacientePorId(this.idPaciente).toPromise();
+
+    
     this.formulario = this.formBuilder.group({
-      nome: [null,[Validators.required]],
-      cpf: [null,[Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
-      sexo:[null],
-      dataNascimento:[null, [Validators.required]],
-      email:[null, [Validators.required, Validators.email]],
-      telefone:[null, [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
+      nome: [paciente.nome,[Validators.required]],
+      cpf: [paciente.cpf,[Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
+      sexo:[paciente.sexo],
+      dataNascimento:[paciente.dataNascimento, [Validators.required]],
+      email:[paciente.email, [Validators.required, Validators.email]],
+      telefone:[paciente.telefone, [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
       endereco: this.formBuilder.group({
-        rua:[null],
-        numero:[null],
-        bairro:[null],
-        cidade:[null],
-        pais:[null]
+        rua:[paciente.enderecoDTO.rua],
+        numero:[paciente.enderecoDTO.numero],
+        bairro:[paciente.enderecoDTO.bairro],
+        cidade:[paciente.enderecoDTO.cidade],
+        pais:[paciente.enderecoDTO.pais]
 
       })
     })
+  })
+}
+
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 
   submit() {

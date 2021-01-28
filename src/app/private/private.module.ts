@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VisualizarPacienteComponent } from './pacientes/visualizar/visualizar-paciente.component';
+import { PacientesEditComponent } from './pacientes/pacientes-edit.component';
 
 
 
@@ -17,6 +18,7 @@ import { VisualizarPacienteComponent } from './pacientes/visualizar/visualizar-p
 @NgModule({
   declarations: [
     PacientesComponent,
+    PacientesEditComponent,
     HomeComponent,
     VisualizarPacienteComponent
   ],

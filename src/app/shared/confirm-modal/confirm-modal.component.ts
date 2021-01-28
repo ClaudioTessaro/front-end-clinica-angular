@@ -14,6 +14,8 @@ export class ConfirmModalComponent implements OnInit {
   @Input() cancelTxt = 'Cancelar';
   @Input() okTxt = 'Sim';
   @Input() type = 'danger';
+  @Input() id: any;
+  @Input() url: string;
 
   confirmResult: Subject<boolean>;
 
